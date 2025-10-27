@@ -1,5 +1,5 @@
 # Zadanie-rekrutacyjne-AGH-Space-Systems-Rocket-Software-jesien-2025:   Automatyczny start i lądowanie rakiety  
-## Opis projektu
+## Opis projektu ```ROCKET_LAUNCH_SEQUENCE.py```
 Program **automatycznie steruje sekwencją startu, lotu i lądowania rakiety**.
 Komunikuje się z systemem pokładowym rakiety przez sieć TCP```(tcp_proxy.py)```, odczytuje dane z czujników (poziomy paliwa, ciśnienie, wysokość)  
 
