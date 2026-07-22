@@ -1,34 +1,44 @@
-# Zadanie-rekrutacyjne-AGH-Space-Systems-Rocket-Software-jesien-2025:   Automatyczny start i lądowanie rakiety  
-## Opis projektu ```ROCKET_LAUNCH_SEQUENCE.py```
-Program **automatycznie steruje sekwencją startu, lotu i lądowania rakiety**.
-Komunikuje się z systemem pokładowym rakiety przez sieć TCP```(tcp_proxy.py)```, odczytuje dane z czujników (poziomy paliwa, ciśnienie, wysokość)  
+# AGH Space Systems – Rocket Software Recruitment Task (Autumn 2025): Automated Rocket Launch and Landing
 
-Steruje zaworami, przekaźnikami oraz zapłonem, reagując w czasie rzeczywistym na zmiany parametrów rakiety.  
+## Project Description ```rocket_controller.py```
 
-W przypadku nieprawidłowości (np. zbyt wysokie ciśnienie lub nieprawidłowa kolejność otwarcia zaworów) program przerywa misję.
-Wszystkie działania i zdarzenia są logowane w pliku rocket.log w celu bezpieczeństwa i analizy.
+The program **automatically controls the rocket's launch, flight, and landing sequence**.
 
-## Uruchamianie  
-1. Uruchom serwer proxy: ```python tcp_proxy.py```
-2. Uruchom symulator rakiety:```python tcp_simulator.py --verbose```
-3. Uruchom kontroler rakiety:```python rocket_controller.py```
+It communicates with the rocket's onboard system over a TCP network ```(tcp_proxy.py)```, continuously reading sensor data such as **fuel levels, pressure, and altitude**.
 
-## Działanie programu    
-Program łączy się z serwerem proxy i wysyła ramki do symulatora zgodnie z kolejnością procedury startu.
-Monitoruje wartości sensorów w czasie rzeczywistym.
-Loguje wszystkie operacje do pliku ```rocket.log```.
-W razie błędów (np. zbyt wysokie ciśnienie lub złe otwarcie zaworów) wyświetla komunikat ostrzegawczy.
+Based on these measurements, the controller operates valves, relays, and the ignition system while reacting to changes in the rocket's state in real time.
 
-Program z **sukcesem** przeprowadza całą sekwencę startu rakiety, lotu oraz lądowania:
-<img width="725" height="417" alt="image" src="https://github.com/user-attachments/assets/a33c657e-a069-4fb2-9407-242987807c74" />
+If any abnormal condition is detected (e.g., excessive pressure or an incorrect valve activation sequence), the program **immediately aborts the mission**.
 
-## Planowane rozszerzenia kodu:   
-- Dodanie testów jednostkowych
-- Optymalizacja kodu
-- Pomiar parametrów w locie  
+All operations and events are logged in the ```rocket.log``` file for safety, debugging, and post-flight analysis.
 
-Dodatkowo:
-- Interfejs graficzny GUI w NiceGUI
-- Automatyczne powiadomienia o ryzyku awarii
+## Running the Project
 
+1. Start the proxy server: ```python tcp_proxy.py```
+2. Start the rocket simulator: ```python tcp_simulator.py --verbose```
+3. Run the rocket controller: ```python rocket_controller.py```
 
+## How the Program Works
+
+The controller connects to the proxy server and sends command frames to the simulator according to the predefined launch procedure.
+
+It continuously monitors sensor readings in real time.
+
+All operations are logged in the ```rocket.log``` file.
+
+If a fault is detected (e.g., excessive pressure or an incorrect valve activation order), the controller displays a warning message and safely aborts the mission.
+
+The program **successfully** executes the complete rocket mission, including launch, flight, and landing:
+
+<img width="725" height="417" alt="Rocket launch sequence" src="https://github.com/user-attachments/assets/a33c657e-a069-4fb2-9407-242987807c74" />
+
+## Planned Improvements
+
+- Add unit tests
+- Optimize the codebase
+- Monitor additional in-flight parameters
+
+Additionally:
+
+- Graphical User Interface (GUI) built with NiceGUI
+- Automatic failure risk detection and notifications
